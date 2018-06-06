@@ -1,7 +1,6 @@
 require 'webrick'
 
 class FileOperations < U::Package
-
   script 'delete duplicates' do
     files = Dir.entries(Dir.pwd).reject { |f| f == '.' || f == '..' || f == '.DS_Store' }
 
@@ -9,7 +8,6 @@ class FileOperations < U::Package
 
     files.each do |file|
       hash = Digest::SHA2.hexdigest File.read(file)
-      
       if hashes[hash].nil?
         hashes[hash] = [file]
       else
@@ -20,7 +18,6 @@ class FileOperations < U::Package
     to_delete = []
 
     hashes.each do |key, value|
-
       if value.length > 1
         to_delete << value[1..-1]
       end
